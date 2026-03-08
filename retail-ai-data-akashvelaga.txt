@@ -1,0 +1,7 @@
+retail-ai-data-akashvelaga
+IP4 ADDRESS 44.223.100.172
+
+ssh -i reatilo-ai-key.pem ec2-user@44.223.100.172
+
+http://107.23.78.60:8501
+CTRL+O 0ENTER  CONTROL+X 

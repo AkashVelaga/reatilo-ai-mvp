@@ -1,0 +1,1009 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\AKASH> D:
+PS D:\> cd AWS
+PS D:\AWS> ssh -i reatilo-ai-key.pem ubuntu@44.223.100.172
+Bad permissions. Try removing permissions for user: NT AUTHORITY\\Authenticated Users (S-1-5-11) on file D:/AWS/reatilo-ai-key.pem.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions for 'reatilo-ai-key.pem' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "reatilo-ai-key.pem": bad permissions
+ubuntu@44.223.100.172: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+PS D:\AWS> icacls reatilo-ai-key.pem /inheritance:r
+processed file: reatilo-ai-key.pem
+Successfully processed 1 files; Failed processing 0 files
+PS D:\AWS> icacls reatilo-ai-key.pem /grant:r "$($env:USERNAME):R"
+processed file: reatilo-ai-key.pem
+Successfully processed 1 files; Failed processing 0 files
+PS D:\AWS> ssh -i reatilo-ai-key.pem ubuntu@44.223.100.172
+ubuntu@44.223.100.172: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+PS D:\AWS> ssh -i reatilo-ai-key.pem ec2-user@44.223.100.172
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Feb 27 15:05:42 2026 from 49.43.217.64
+[ec2-user@ip-172-31-0-98 ~]$ sudo yum update -y
+sudo yum install python3 -y
+Last metadata expiration check: 0:09:42 ago on Fri Feb 27 15:07:24 2026.
+Dependencies resolved.
+Nothing to do.
+Complete!
+Last metadata expiration check: 0:09:42 ago on Fri Feb 27 15:07:24 2026.
+Package python3-3.9.25-1.amzn2023.0.3.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[ec2-user@ip-172-31-0-98 ~]$ python3 -m venv reatilo-env
+source reatilo-env/bin/activate
+(reatilo-env) [ec2-user@ip-172-31-0-98 ~]$ pip install --upgrade pip
+pip install streamlit xgboost pandas numpy
+Requirement already satisfied: pip in ./reatilo-env/lib/python3.9/site-packages (21.3.1)
+Collecting pip
+  Using cached pip-26.0.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.3.1
+    Uninstalling pip-21.3.1:
+      Successfully uninstalled pip-21.3.1
+Successfully installed pip-26.0.1
+Collecting streamlit
+  Using cached streamlit-1.50.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting xgboost
+  Using cached xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+Collecting pandas
+  Using cached pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Using cached numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting altair!=5.4.0,!=5.4.1,<6,>=4.0 (from streamlit)
+  Using cached altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit)
+  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=4.0 (from streamlit)
+  Using cached cachetools-6.2.6-py3-none-any.whl.metadata (5.6 kB)
+Collecting click<9,>=7.0 (from streamlit)
+  Using cached click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging<26,>=20 (from streamlit)
+  Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pillow<12,>=7.1.0 (from streamlit)
+  Using cached pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting protobuf<7,>=3.20 (from streamlit)
+  Using cached protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit)
+  Using cached pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting requests<3,>=2.27 (from streamlit)
+  Using cached requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting tenacity<10,>=8.1.0 (from streamlit)
+  Using cached tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit)
+  Using cached toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.4.0 (from streamlit)
+  Using cached typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting watchdog<7,>=2.1.5 (from streamlit)
+  Using cached watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)
+  Using cached gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit)
+  Using cached pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit)
+  Using cached tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Using cached tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting jinja2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema>=3.0 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting narwhals>=1.14.2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Using cached narwhals-2.17.0-py3-none-any.whl.metadata (14 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Using cached gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Using cached smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2.27->streamlit)
+  Using cached charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.27->streamlit)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3,>=2.27->streamlit)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.27->streamlit)
+  Using cached certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting nvidia-nccl-cu12 (from xgboost)
+  Using cached nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting scipy (from xgboost)
+  Using cached scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Using cached streamlit-1.50.0-py3-none-any.whl (10.1 MB)
+Using cached pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+Using cached numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+Using cached altair-5.5.0-py3-none-any.whl (731 kB)
+Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Using cached cachetools-6.2.6-py3-none-any.whl (11 kB)
+Using cached click-8.1.8-py3-none-any.whl (98 kB)
+Using cached gitpython-3.1.46-py3-none-any.whl (208 kB)
+Using cached gitdb-4.0.12-py3-none-any.whl (62 kB)
+Using cached packaging-25.0-py3-none-any.whl (66 kB)
+Using cached pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+Using cached protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Using cached pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+Using cached requests-2.32.5-py3-none-any.whl (64 kB)
+Using cached charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Using cached smmap-5.0.2-py3-none-any.whl (24 kB)
+Using cached tenacity-9.1.2-py3-none-any.whl (28 kB)
+Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Using cached tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+Using cached watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl (223.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━ 210.8/223.6 MB 377.9 MB/s eta 0:00:01
+ERROR: Exception:
+Traceback (most recent call last):
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 438, in _error_catcher
+    yield
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 561, in read
+    data = self._fp_read(amt) if not fp_closed else b""
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 527, in _fp_read
+    return self._fp.read(amt) if amt is not None else self._fp.read()
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/cachecontrol/filewrapper.py", line 104, in read
+    self.__buf.write(data)
+  File "/usr/lib64/python3.9/tempfile.py", line 494, in func_wrapper
+    return func(*args, **kwargs)
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+    status = _inner_run()
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+    return self.run(options, args)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/cli/req_command.py", line 96, in wrapper
+    return func(self, options, args)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/commands/install.py", line 419, in run
+    preparer.prepare_linked_requirements_more(
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/operations/prepare.py", line 569, in prepare_linked_requirements_more
+    self._complete_partial_requirements(
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/operations/prepare.py", line 478, in _complete_partial_requirements
+    for link, (filepath, _) in batch_download:
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/network/download.py", line 183, in batch
+    filepath, content_type = self(link, location)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/network/download.py", line 194, in __call__
+    self._process_response(download, resp)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/network/download.py", line 211, in _process_response
+    for chunk in chunks:
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/cli/progress_bars.py", line 69, in _rich_download_progress_bar
+    for chunk in iterable:
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_internal/network/utils.py", line 65, in response_chunks
+    for chunk in response.raw.stream(
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 622, in stream
+    data = self.read(amt=amt, decode_content=decode_content)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 587, in read
+    raise IncompleteRead(self._fp_bytes_read, self.length_remaining)
+  File "/usr/lib64/python3.9/contextlib.py", line 137, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 455, in _error_catcher
+    raise ProtocolError("Connection broken: %r" % e, e)
+pip._vendor.urllib3.exceptions.ProtocolError: ("Connection broken: OSError(28, 'No space left on device')", OSError(28, 'No space left on device'))
+(reatilo-env) [ec2-user@ip-172-31-0-98 ~]$ Connection to 44.223.100.172 closed by remote host.
+Connection to 44.223.100.172 closed.
+PS D:\AWS> ssh -i reatilo-ai-key.pem ubuntu@44.223.100.172
+ssh: connect to host 44.223.100.172 port 22: Connection timed out
+PS D:\AWS> ssh -i reatilo-ai-key.pem ubuntu@107.23.78.60
+The authenticity of host '107.23.78.60 (107.23.78.60)' can't be established.
+ED25519 key fingerprint is SHA256:N/EGJ9Osu56pYUvMT/ZsdMkJQbSBO0et2fKVRCrTi34.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? YES
+Warning: Permanently added '107.23.78.60' (ED25519) to the list of known hosts.
+ubuntu@107.23.78.60: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+PS D:\AWS> ssh -i reatilo-ai-key.pem ec2-user@107.23.78.60
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-12-58 ~]$ df -h
+Filesystem        Size  Used Avail Use% Mounted on
+devtmpfs          4.0M     0  4.0M   0% /dev
+tmpfs             459M     0  459M   0% /dev/shm
+tmpfs             184M  432K  183M   1% /run
+/dev/nvme0n1p1     20G  1.7G   19G   9% /
+tmpfs             459M     0  459M   0% /tmp
+/dev/nvme0n1p128   10M  1.3M  8.7M  13% /boot/efi
+tmpfs              92M     0   92M   0% /run/user/1000
+[ec2-user@ip-172-31-12-58 ~]$ sudo yum update -y
+Amazon Linux 2023 Kernel Livepatch repository                                           250 kB/s |  31 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[ec2-user@ip-172-31-12-58 ~]$ sudo yum install python3 -y
+Last metadata expiration check: 0:00:19 ago on Fri Feb 27 15:30:10 2026.
+Package python3-3.9.25-1.amzn2023.0.3.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[ec2-user@ip-172-31-12-58 ~]$ python3 -m venv reatilo-env
+source reatilo-env/bin/activate
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install --upgrade pip
+Requirement already satisfied: pip in ./reatilo-env/lib/python3.9/site-packages (21.3.1)
+Collecting pip
+  Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+     |████████████████████████████████| 1.8 MB 16.8 MB/s
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.3.1
+    Uninstalling pip-21.3.1:
+      Successfully uninstalled pip-21.3.1
+Successfully installed pip-26.0.1
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install --upgrade pip
+Requirement already satisfied: pip in ./reatilo-env/lib/python3.9/site-packages (26.0.1)
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install --no-cache-dir streamlit xgboost pandas numpy
+Collecting streamlit
+  Downloading streamlit-1.50.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting xgboost
+  Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+Collecting pandas
+  Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting altair!=5.4.0,!=5.4.1,<6,>=4.0 (from streamlit)
+  Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit)
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=4.0 (from streamlit)
+  Downloading cachetools-6.2.6-py3-none-any.whl.metadata (5.6 kB)
+Collecting click<9,>=7.0 (from streamlit)
+  Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging<26,>=20 (from streamlit)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pillow<12,>=7.1.0 (from streamlit)
+  Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting protobuf<7,>=3.20 (from streamlit)
+  Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit)
+  Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting requests<3,>=2.27 (from streamlit)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting tenacity<10,>=8.1.0 (from streamlit)
+  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit)
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.4.0 (from streamlit)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting watchdog<7,>=2.1.5 (from streamlit)
+  Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)
+  Downloading gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit)
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit)
+  Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting jinja2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema>=3.0 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting narwhals>=1.14.2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading narwhals-2.17.0-py3-none-any.whl.metadata (14 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2.27->streamlit)
+  Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.27->streamlit)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3,>=2.27->streamlit)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.27->streamlit)
+  Downloading certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting nvidia-nccl-cu12 (from xgboost)
+  Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting scipy (from xgboost)
+  Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading streamlit-1.50.0-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 143.9 MB/s  0:00:00
+Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 374.2 MB/s  0:00:00
+Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.5/19.5 MB 452.0 MB/s  0:00:00
+Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 575.9 MB/s  0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading cachetools-6.2.6-py3-none-any.whl (11 kB)
+Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Downloading gitpython-3.1.46-py3-none-any.whl (208 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 150.8 MB/s  0:00:00
+Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 263.4 MB/s  0:00:00
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl (223.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 223.6/223.6 MB 215.2 MB/s  0:00:01
+Downloading certifi-2026.2.25-py3-none-any.whl (153 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)
+Downloading narwhals-2.17.0-py3-none-any.whl (444 kB)
+Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl (42.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.7/42.7 MB 194.0 MB/s  0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (384 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl (289.8 MB)
+   ━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━ 121.6/289.8 MB 200.6 MB/s eta 0:00:01ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device
+
+   ━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━ 152.6/289.8 MB 210.2 MB/s eta 0:00:01
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ python -c "import streamlit, xgboost, pandas, numpy; print('Environment OK')"
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'streamlit'
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install --no-cache-dir streamlit xgboost pandas numpy
+Collecting streamlit
+  Downloading streamlit-1.50.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting xgboost
+  Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+Collecting pandas
+  Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting altair!=5.4.0,!=5.4.1,<6,>=4.0 (from streamlit)
+  Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit)
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=4.0 (from streamlit)
+  Downloading cachetools-6.2.6-py3-none-any.whl.metadata (5.6 kB)
+Collecting click<9,>=7.0 (from streamlit)
+  Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging<26,>=20 (from streamlit)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pillow<12,>=7.1.0 (from streamlit)
+  Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting protobuf<7,>=3.20 (from streamlit)
+  Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit)
+  Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting requests<3,>=2.27 (from streamlit)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting tenacity<10,>=8.1.0 (from streamlit)
+  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit)
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.4.0 (from streamlit)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting watchdog<7,>=2.1.5 (from streamlit)
+  Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)
+  Downloading gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit)
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit)
+  Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting jinja2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema>=3.0 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting narwhals>=1.14.2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading narwhals-2.17.0-py3-none-any.whl.metadata (14 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2.27->streamlit)
+  Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.27->streamlit)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3,>=2.27->streamlit)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.27->streamlit)
+  Downloading certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting nvidia-nccl-cu12 (from xgboost)
+  Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting scipy (from xgboost)
+  Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading streamlit-1.50.0-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 223.8 MB/s  0:00:00
+Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 446.4 MB/s  0:00:00
+Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.5/19.5 MB 447.3 MB/s  0:00:00
+Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 298.7 MB/s  0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading cachetools-6.2.6-py3-none-any.whl (11 kB)
+Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Downloading gitpython-3.1.46-py3-none-any.whl (208 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 466.0 MB/s  0:00:00
+Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 443.8 MB/s  0:00:00
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl (223.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 223.6/223.6 MB 170.9 MB/s  0:00:01
+Downloading certifi-2026.2.25-py3-none-any.whl (153 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)
+Downloading narwhals-2.17.0-py3-none-any.whl (444 kB)
+Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl (42.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.7/42.7 MB 143.2 MB/s  0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (384 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl (289.8 MB)
+   ━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.1/289.8 MB 248.9 MB/s eta 0:00:01ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device
+
+   ━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━ 152.6/289.8 MB 287.0 MB/s eta 0:00:01
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ mkdir ~/pip-temp
+export TMPDIR=~/pip-temp
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ echo $TMPDIR
+/home/ec2-user/pip-temp
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install --no-cache-dir streamlit xgboost pandas numpy
+Collecting streamlit
+  Downloading streamlit-1.50.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting xgboost
+  Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+Collecting pandas
+  Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting altair!=5.4.0,!=5.4.1,<6,>=4.0 (from streamlit)
+  Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit)
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=4.0 (from streamlit)
+  Downloading cachetools-6.2.6-py3-none-any.whl.metadata (5.6 kB)
+Collecting click<9,>=7.0 (from streamlit)
+  Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging<26,>=20 (from streamlit)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pillow<12,>=7.1.0 (from streamlit)
+  Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting protobuf<7,>=3.20 (from streamlit)
+  Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit)
+  Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting requests<3,>=2.27 (from streamlit)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting tenacity<10,>=8.1.0 (from streamlit)
+  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit)
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.4.0 (from streamlit)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting watchdog<7,>=2.1.5 (from streamlit)
+  Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)
+  Downloading gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit)
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit)
+  Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting jinja2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema>=3.0 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting narwhals>=1.14.2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading narwhals-2.17.0-py3-none-any.whl.metadata (14 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)
+  Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2.27->streamlit)
+  Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.27->streamlit)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3,>=2.27->streamlit)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.27->streamlit)
+  Downloading certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting nvidia-nccl-cu12 (from xgboost)
+  Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting scipy (from xgboost)
+  Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)
+  Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading streamlit-1.50.0-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 167.4 MB/s  0:00:00
+Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 346.3 MB/s  0:00:00
+Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.5/19.5 MB 392.2 MB/s  0:00:00
+Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 140.9 MB/s  0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading cachetools-6.2.6-py3-none-any.whl (11 kB)
+Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Downloading gitpython-3.1.46-py3-none-any.whl (208 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 629.6 MB/s  0:00:00
+Downloading protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 491.6 MB/s  0:00:00
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+Downloading charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+Downloading xgboost-2.1.4-py3-none-manylinux_2_28_x86_64.whl (223.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 223.6/223.6 MB 215.2 MB/s  0:00:01
+Downloading certifi-2026.2.25-py3-none-any.whl (153 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Downloading markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)
+Downloading narwhals-2.17.0-py3-none-any.whl (444 kB)
+Downloading pyarrow-21.0.0-cp39-cp39-manylinux_2_28_x86_64.whl (42.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.7/42.7 MB 496.4 MB/s  0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Downloading rpds_py-0.27.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (384 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl (289.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 289.8/289.8 MB 156.5 MB/s  0:00:01
+Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.6/38.6 MB 137.3 MB/s  0:00:00
+Installing collected packages: pytz, watchdog, urllib3, tzdata, typing-extensions, tornado, toml, tenacity, smmap, six, rpds-py, pyarrow, protobuf, pillow, packaging, nvidia-nccl-cu12, numpy, narwhals, MarkupSafe, idna, click, charset_normalizer, certifi, cachetools, blinker, attrs, scipy, requests, referencing, python-dateutil, jinja2, gitdb, xgboost, pydeck, pandas, jsonschema-specifications, gitpython, jsonschema, altair, streamlit
+Successfully installed MarkupSafe-3.0.3 altair-5.5.0 attrs-25.4.0 blinker-1.9.0 cachetools-6.2.6 certifi-2026.2.25 charset_normalizer-3.4.4 click-8.1.8 gitdb-4.0.12 gitpython-3.1.46 idna-3.11 jinja2-3.1.6 jsonschema-4.25.1 jsonschema-specifications-2025.9.1 narwhals-2.17.0 numpy-2.0.2 nvidia-nccl-cu12-2.29.3 packaging-25.0 pandas-2.3.3 pillow-11.3.0 protobuf-6.33.5 pyarrow-21.0.0 pydeck-0.9.1 python-dateutil-2.9.0.post0 pytz-2025.2 referencing-0.36.2 requests-2.32.5 rpds-py-0.27.1 scipy-1.13.1 six-1.17.0 smmap-5.0.2 streamlit-1.50.0 tenacity-9.1.2 toml-0.10.2 tornado-6.5.4 typing-extensions-4.15.0 tzdata-2025.3 urllib3-2.6.3 watchdog-6.0.0 xgboost-2.1.4
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ python -c "import streamlit, xgboost, pandas, numpy; print('Environment OK')"
+Environment OK
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+Usage: streamlit run [OPTIONS] TARGET [ARGS]...
+Try 'streamlit run --help' for help.
+
+Error: Invalid value: File does not exist: app.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ ls
+pip-temp  reatilo-env
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+Usage: streamlit run [OPTIONS] TARGET [ARGS]...
+Try 'streamlit run --help' for help.
+
+Error: Invalid value: File does not exist: app.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ source reatilo-env/bin/activate
+streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+Usage: streamlit run [OPTIONS] TARGET [ARGS]...
+Try 'streamlit run --help' for help.
+
+Error: Invalid value: File does not exist: app.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ dir
+pip-temp  reatilo-env
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ scp -i reatilo-ai-key.pem app.py ec2-user@107.23.78.60:~
+scp -i reatilo-ai-key.pem demand_model.json ec2-user@107.23.78.60:~
+Warning: Identity file reatilo-ai-key.pem not accessible: No such file or directory.
+The authenticity of host '107.23.78.60 (107.23.78.60)' can't be established.
+ED25519 key fingerprint is SHA256:N/EGJ9Osu56pYUvMT/ZsdMkJQbSBO0et2fKVRCrTi34.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '107.23.78.60' (ED25519) to the list of known hosts.
+ec2-user@107.23.78.60: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+Connection closed
+Warning: Identity file reatilo-ai-key.pem not accessible: No such file or directory.
+ec2-user@107.23.78.60: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+Connection closed
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ dir D:\*.pem /s
+dir: cannot access 'D:*.pem': No such file or directory
+dir: cannot access '/s': No such file or directory
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ exit
+logout
+Connection to 107.23.78.60 closed.
+PS D:\AWS> dir D:\*.pem -Recurse
+
+
+    Directory: D:\AWS
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        27-02-2026     20:19           1678 reatilo-ai-key.pem
+
+
+    Directory: D:\Downloads\flutter\flutter\bin\mingit\mingw64\ssl
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        24-07-2023     18:55         252313 cert.pem
+
+
+    Directory: D:\Downloads\jar\mysql-connector-j-8.0.32\src\test\config\ssl-test-certs
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        12-04-2023     19:12           1484 ca-cert-ext.pem
+-a----        12-04-2023     19:12           1464 ca-cert.pem
+-a----        12-04-2023     19:12           1679 ca-key-ext.pem
+-a----        12-04-2023     19:12           1679 ca-key.pem
+-a----        12-04-2023     19:12           1342 client-cert-ext.pem
+-a----        12-04-2023     19:12           1342 client-cert.pem
+-a----        12-04-2023     19:12           1679 client-key-ext.pem
+-a----        12-04-2023     19:12           1679 client-key.pem
+-a----        12-04-2023     19:12            887 mykey.pem
+-a----        12-04-2023     19:12           1342 server-cert-ext.pem
+-a----        12-04-2023     19:12           1558 server-cert.pem
+-a----        12-04-2023     19:12           1675 server-key-ext.pem
+-a----        12-04-2023     19:12           1675 server-key.pem
+
+
+    Directory: D:\Downloads\mysql-connector-j-9.5.0\mysql-connector-j-9.5.0\src\test\config\ssl-test-certs
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        25-09-2025     13:30           1484 ca-cert-ext.pem
+-a----        25-09-2025     13:30           1464 ca-cert.pem
+-a----        25-09-2025     13:30           1679 ca-key-ext.pem
+-a----        25-09-2025     13:30           1679 ca-key.pem
+-a----        25-09-2025     13:30           1342 client-cert-ext.pem
+-a----        25-09-2025     13:30           1342 client-cert.pem
+-a----        25-09-2025     13:30           1679 client-key-ext.pem
+-a----        25-09-2025     13:30           1679 client-key.pem
+-a----        25-09-2025     13:30            887 mykey.pem
+-a----        25-09-2025     13:30           1342 server-cert-ext.pem
+-a----        25-09-2025     13:30           1558 server-cert.pem
+-a----        25-09-2025     13:30           1675 server-key-ext.pem
+-a----        25-09-2025     13:30           1675 server-key.pem
+
+
+    Directory: D:\Downloads\phpMyAdmin-5.2.1-all-languages\phpMyAdmin-5.2.1-all-languages\vendor\composer\ca-bundle\res
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        12-02-2024     14:26         216583 cacert.pem
+
+
+    Directory: D:\Downloads\SOURCE CODE\SOURCE CODE\DEEP_FAKE\dfenv\Lib\site-packages\certifi
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        02-04-2024     11:42         290282 cacert.pem
+
+
+    Directory: D:\Downloads\SOURCE CODE\SOURCE CODE\DEEP_FAKE\dfenv\Lib\site-packages\grpc\_cython\_credentials
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        02-04-2024     11:45         268777 roots.pem
+
+
+    Directory: D:\Downloads\SOURCE CODE\SOURCE CODE\DEEP_FAKE\dfenv\Lib\site-packages\pip\_vendor\certifi
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        02-04-2024     11:48         281617 cacert.pem
+
+
+    Directory: D:\Downloads
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        27-02-2026     20:19           1678 reatilo-ai-key.pem
+
+
+    Directory: D:\Kiro\resources\app\extensions\kiro.kiro-agent\node_modules\win-ca\pem
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        16-01-2026     01:25         923568 roots.pem
+dir : Access to the path 'D:\WindowsApps' is denied.
+At line:1 char:1
++ dir D:\*.pem -Recurse
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (D:\WindowsApps:String) [Get-ChildItem], UnauthorizedAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+
+
+
+PS D:\AWS> ssh -i "D:\aws\reatilo-ai-key.pem" ec2-user@107.23.78.60
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Feb 27 15:28:05 2026 from 49.43.217.64
+[ec2-user@ip-172-31-12-58 ~]$ source reatilo-env/bin/activate
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ nano train_model.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ python train_model.py
+Traceback (most recent call last):
+  File "/home/ec2-user/train_model.py", line 14, in <module>
+    model = xgb.XGBRegressor()
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/xgboost/sklearn.py", line 1794, in __init__
+    super().__init__(objective=objective, **kwargs)
+  File "/home/ec2-user/reatilo-env/lib64/python3.9/site-packages/xgboost/sklearn.py", line 744, in __init__
+    raise ImportError(
+ImportError: sklearn needs to be installed in order to use this module
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ pip install scikit-learn
+Collecting scikit-learn
+  Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+Requirement already satisfied: numpy>=1.19.5 in ./reatilo-env/lib/python3.9/site-packages (from scikit-learn) (2.0.2)
+Requirement already satisfied: scipy>=1.6.0 in ./reatilo-env/lib/python3.9/site-packages (from scikit-learn) (1.13.1)
+Collecting joblib>=1.2.0 (from scikit-learn)
+  Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn)
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 74.0 MB/s  0:00:00
+Downloading joblib-1.5.3-py3-none-any.whl (309 kB)
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Installing collected packages: threadpoolctl, joblib, scikit-learn
+Successfully installed joblib-1.5.3 scikit-learn-1.6.1 threadpoolctl-3.6.0
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ python train_model.py
+Model saved successfully.
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ ls
+demand_model.json  pip-temp  reatilo-env  train_model.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ nano app.py
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+client_loop: send disconnect: Connection reset
+PS D:\AWS> ssh -i "D:\aws\reatilo-ai-key.pem" ec2-user@107.23.78.60
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Feb 27 15:53:07 2026 from 49.43.217.64
+[ec2-user@ip-172-31-12-58 ~]$ http://44.223.100.172:8501
+-bash: http://44.223.100.172:8501: No such file or directory
+[ec2-user@ip-172-31-12-58 ~]$ sudo netstat -tulpn | grep 8501
+tcp        0      0 0.0.0.0:8501            0.0.0.0:*               LISTEN      3213/python3
+[ec2-user@ip-172-31-12-58 ~]$ client_loop: send disconnect: Connection reset
+PS D:\AWS> ssh -i "D:\aws\reatilo-ai-key.pem" ec2-user@107.23.78.60
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Feb 27 16:18:57 2026 from 49.43.217.64
+[ec2-user@ip-172-31-12-58 ~]$ curl http://localhost:8501
+<!--
+ Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022-2025)
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="shortcut icon" href="./favicon.png" />
+    <link
+      rel="preload"
+      href="./static/media/SourceSansVF-Upright.ttf.BsWL4Kly.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <title>Streamlit</title>
+
+    <!-- initialize window.prerenderReady to false and then set to true in React app when app is ready for indexing -->
+    <script>
+      window.prerenderReady = false
+    </script>
+    <script type="module" crossorigin src="./static/js/index.6xX1278W.js"></script>
+    <link rel="stylesheet" crossorigin href="./static/css/index.CIiu7Ygf.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+[ec2-user@ip-172-31-12-58 ~]$ client_loop: send disconnect: Connection reset
+PS D:\AWS> ssh -i "D:\aws\reatilo-ai-key.pem" ec2-user@107.23.78.60
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Fri Feb 27 16:37:18 2026 from 49.43.217.64
+[ec2-user@ip-172-31-12-58 ~]$ nano app.py
+[ec2-user@ip-172-31-12-58 ~]$ ^C
+[ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+-bash: streamlit: command not found
+[ec2-user@ip-172-31-12-58 ~]$ ^C
+[ec2-user@ip-172-31-12-58 ~]$ source reatilo-env/bin/activate
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+2026-02-27 16:49:54.078 Port 8501 is already in use
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+2026-02-27 16:50:10.739 Port 8501 is already in use
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ sudo lsof -i :8501
+COMMAND    PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+streamlit 3213 ec2-user    6u  IPv4  22143      0t0  TCP *:cmtp-mgt (LISTEN)
+streamlit 3213 ec2-user    7u  IPv4  25373      0t0  TCP ip-172-31-12-58.ec2.internal:cmtp-mgt->49.43.217.64:oma-mlp-s (ESTABLISHED)
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ kill -9 3213
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$ streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+
+^Z
+[1]+  Stopped                 streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+(reatilo-env) [ec2-user@ip-172-31-12-58 ~]$
+
