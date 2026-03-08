@@ -1,21 +1,22 @@
-import xgboost as xgb
-import numpy as np
+# train_model.py
 
-# Dummy training data
+from sklearn.ensemble import RandomForestRegressor
+import numpy as np
+import joblib
+
 X = np.array([
-    [10, 2, 1, 0],
-    [15, 3, 2, 1],
-    [8, 1, 0, 0],
-    [20, 4, 3, 1]
+    [10,2,1,0],
+    [15,3,2,1],
+    [8,1,0,0],
+    [20,4,3,1],
+    [12,2,1,0]
 ])
 
-y = np.array([100, 150, 80, 200])
+y = np.array([100,150,80,200,120])
 
-# Train model
-model = xgb.XGBRegressor()
-model.fit(X, y)
+model = RandomForestRegressor()
+model.fit(X,y)
 
-# Save model in native format
-model.get_booster().save_model("demand_model.json")
+joblib.dump(model,"demand_model.pkl")
 
-print("Model saved as demand_model.json")
+print("Model saved")
