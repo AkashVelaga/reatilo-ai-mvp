@@ -1,26 +1,23 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
 
-# Page config
-st.set_page_config(
-    page_title="Reatilo AI - Retail Demand Predictor",
-    page_icon="📊",
-    layout="wide"
-)
+st.set_page_config(page_title="Reatilo AI", layout="wide")
 
-# Title
 st.title("📊 Reatilo AI")
 st.subheader("Smart Retail Demand Prediction Platform")
-
-st.markdown("---")
 
 # Load model
 model = joblib.load("demand_model.pkl")
 
-# Layout
+st.markdown("---")
+
+# Layout columns
 col1, col2 = st.columns(2)
 
+# LEFT SIDE → INPUTS
 with col1:
     st.header("Input Product Data")
 
@@ -31,7 +28,7 @@ with col1:
         ["No", "Yes"]
     )
 
-    store_visitors = st.slider(
+    visitors = st.slider(
         "Daily Store Visitors",
         50, 500, 150
     )
@@ -43,26 +40,35 @@ with col1:
 
     promotion = 1 if promotion == "Yes" else 0
 
-    predict_button = st.button("Predict Demand")
+    predict = st.button("Predict Demand")
 
+# RIGHT SIDE → RESULTS + GRAPH
 with col2:
-    st.header("Prediction Result")
 
-    if predict_button:
+    st.header("Prediction Output")
 
-        features = np.array([[price, promotion, store_visitors, competitor_price]])
+    if predict:
+
+        features = np.array([[price, promotion, visitors, competitor_price]])
 
         prediction = model.predict(features)[0]
 
         st.success(f"Predicted Demand: {round(prediction,2)} units")
 
-        if prediction > 80:
-            st.warning("High demand expected. Increase inventory.")
-        elif prediction < 40:
-            st.error("Low demand expected. Reduce stock.")
-        else:
-            st.info("Moderate demand predicted.")
+        # Create simple graph
+        data = pd.DataFrame({
+            "Metric": ["Price", "Visitors", "Competitor Price", "Predicted Demand"],
+            "Value": [price, visitors, competitor_price, prediction]
+        })
+
+        fig, ax = plt.subplots()
+
+        ax.bar(data["Metric"], data["Value"])
+
+        ax.set_title("Retail Demand Insights")
+
+        st.pyplot(fig)
 
 st.markdown("---")
 
-st.write("AI-powered retail insights for smarter inventory decisions.")
+st.write("AI-powered retail insights to help businesses optimize inventory.")
